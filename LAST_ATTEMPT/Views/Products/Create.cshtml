@@ -1,0 +1,54 @@
+﻿@model LAST_ATTEMPT.Models.Product
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add to catalogue</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Prod_Name" class="control-label"></label>
+                <input asp-for="Prod_Name" class="form-control" />
+                <span asp-validation-for="Prod_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prod_Description" class="control-label"></label>
+                <textarea asp-for="Prod_Description" class="form-control"></textarea>
+                <span asp-validation-for="Prod_Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <input asp-for="Category" class="form-control" />
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prod_Availability" class="control-label"></label>
+                <input asp-for="Prod_Availability" class="form-control" />
+                <span asp-validation-for="Prod_Availability" class="text-danger"></span>
+            </div>
+            <!-- Add more fields as needed -->
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="EditProducts" asp-controller="Home">Back to List</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+

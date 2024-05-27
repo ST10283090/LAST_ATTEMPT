@@ -1,0 +1,65 @@
+﻿@model List<LAST_ATTEMPT.Models.Order>
+
+@{
+    ViewData["Title"] = "Admin Orders";
+}
+
+<h1>Admin Orders</h1>
+
+<form asp-action="ClearOrders" method="post" onsubmit="return confirm('Are you sure you want to clear all orders?');">
+    <button type="submit" class="btn btn-danger">Clear All Orders</button>
+</form>
+
+@if (Model == null || !Model.Any())
+{
+    <p>No orders available.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order Date</th>
+                <th>User</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.OrderDate</td>
+                    <td>@order.UserId</td>
+                    <td>@order.Status</td>
+                    <td>@(order.OrderItems?.Sum(item => item.Quantity * item.Price) ?? 0)</td>
+                    <td>
+                        @if (order.Status == "Pending")
+                        {
+                            <form asp-action="ProcessOrder" method="post">
+                                <input type="hidden" name="id" value="@order.Id" />
+                                <button type="submit" class="btn btn-primary">Process Order</button>
+                            </form>
+                        }
+                        else if (order.Status == "Processing")
+                        {
+                            <form asp-action="ProcessNow" method="post">
+                                <input type="hidden" name="id" value="@order.Id" />
+                                <button type="submit" class="btn btn-secondary">Process Now</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <span>Order Processed</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
+

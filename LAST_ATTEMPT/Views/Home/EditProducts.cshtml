@@ -1,0 +1,45 @@
+﻿@model List<LAST_ATTEMPT.Models.Product>
+
+@{
+    ViewData["Title"] = "Manage Products";
+}
+
+<h1>Manage Products</h1>
+
+<p>
+    <a asp-action="Create" asp-controller="Products" class="btn btn-primary">Add more to the catalogue</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Availability</th>
+            <th>Category</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Prod_Name</td>
+                <td>@item.Prod_Description</td>
+                <td>@item.Price</td>
+                <td>@item.Prod_Availability</td>
+                <td>@item.Category</td>
+                <td>@item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                <td>@item.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Products" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                    <a asp-action="Details" asp-controller="Products" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                    <a asp-action="Delete" asp-controller="Products" asp-route-id="@item.Id" class="btn btn-primary">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

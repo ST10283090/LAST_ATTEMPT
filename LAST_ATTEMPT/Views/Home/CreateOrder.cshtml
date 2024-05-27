@@ -1,0 +1,33 @@
+﻿@model LAST_ATTEMPT.Models.Order
+
+@{
+    ViewData["Title"] = "Create Order";
+    var products = ViewBag.Products as List<LAST_ATTEMPT.Models.Product>; // Assuming you pass products via ViewBag
+}
+
+<h1>Create Order</h1>
+
+<form asp-action="CreateOrder" method="post">
+    <div class="form-group">
+        <label asp-for="OrderDate"></label>
+        <input asp-for="OrderDate" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="UserId"></label>
+        <input asp-for="UserId" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Status"></label>
+        <input asp-for="Status" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label>Products</label>
+        <select asp-for="OrderItems" class="form-control" multiple>
+            @foreach (var product in products)
+            {
+                <option value="@product.Id">@product.Prod_Name - $@product.Price</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

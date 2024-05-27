@@ -1,0 +1,36 @@
+﻿@model List<LAST_ATTEMPT.Models.Product>
+@{
+    ViewData["Title"] = "ArtnCraft";
+}
+
+<h1>Items for sale</h1>
+
+<div class="container">
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Prod_Name</h5>
+                        <p class="card-text">@product.Prod_Description</p>
+                        <p class="card-text">Price: $@product.Price</p>
+                        @if (User.IsInRole("Customer"))
+                        {
+                            <form asp-controller="Products" asp-action="AddToCart" method="post">
+                                <input type="hidden" name="id" value="@product.Id" />
+                                <button type="submit" class="btn btn-primary">Add to wishlist</button>
+                            </form>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+}
